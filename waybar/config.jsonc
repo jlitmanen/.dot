@@ -1,0 +1,80 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "tray",
+    "pulseaudio",
+    "network",
+    "bluetooth",
+    "battery",
+    "cpu",
+    "memory",
+  ],
+  "hyprland/workspaces": {
+    "persistent-workspaces": {
+      "HDMI-A-1": [1, 2, 3, 4, 5],
+      "eDP-1": [6],
+    },
+  },
+  "clock": {
+    "format": "{:%H:%M  %d/%m}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+  },
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-muted": "󰝟 Muted",
+    "format-icons": {
+      "default": ["", "", ""],
+    },
+    "on-click": "foot -e wiremix",
+  },
+  "group/network-bt": {
+    "orientation": "horizontal",
+    "modules": ["bluetooth", "network"],
+  },
+  "bluetooth": {
+    "format": "󰂯",
+    "format-connected": "󰂱",
+    "on-click": "foot -e bluetui",
+  },
+  "network": {
+    "format-wifi": " ",
+    "format-disconnected": "󰖪 ",
+    "on-click": "foot -e impala",
+  },
+  "group/hardware": {
+    "orientation": "horizontal",
+    "modules": ["cpu", "memory", "battery"],
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "hardware-child",
+      "transition-left-to-right": false,
+    },
+  },
+  "cpu": {
+    "interval": 10,
+    "format": "{usage}% ",
+    "max-length": 10,
+    "on-click": "foot -e btop",
+  },
+  "memory": {
+    "format": "{percentage}% ",
+    "interval": 5,
+    "on-click": "foot -e btop",
+  },
+  "battery": {
+    "bat": "BAT0",
+    "interval": 60,
+    "states": {
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": "{capacity}% {icon}",
+    "format-icons": ["", "", "", "", ""],
+    "max-length": 25,
+    "on-click": "foot -e btop",
+  },
+}

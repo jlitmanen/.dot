@@ -1,0 +1,8 @@
+#!/bin/bash
+
+swayidle -w \
+  timeout 900 'swaylock -f' \
+  timeout 1800 'niri msg action power-off-monitors' \
+  resume 'niri msg action power-on-monitors' \
+  timeout 2700 'systemctl suspend' \
+  before-sleep 'swaylock -f'

@@ -1,0 +1,50 @@
+#!/bin/bash
+
+# Fuzzel Power Menu
+# A simple power menu script for fuzzel
+
+# Define menu options
+options="⏻ Shutdown\n⟲ Reboot\n⏾ Suspend\n⏾ Hibernate\n🔒 Lock\n⎌ Logout"
+
+# Show menu and get selection
+selected=$(echo -e "$options" | fuzzel --dmenu --prompt="Power Menu: ")
+
+# Execute selected action
+case "$selected" in
+    "⏻ Shutdown")
+        systemctl poweroff
+        ;;
+    "⟲ Reboot")
+        systemctl reboot
+        ;;
+    "⏾ Suspend")
+        systemctl suspend
+        ;;
+    "⏾ Hibernate")
+        systemctl hibernate
+        ;;
+    "🔒 Lock")
+        # Try common Wayland lock commands
+        if command -v swaylock &> /dev/null; then
+            swaylock
+        elif command -v waylock &> /dev/null; then
+            waylock
+        elif command -v hyprlock &> /dev/null; then
+            hyprlock
+        else
+            notify-send "Lock Error" "No lock screen found"
+        fi
+        ;;
+    "⎌ Logout")
+        # Detect compositor and logout
+        if [ "$XDG_CURRENT_DESKTOP" = "sway" ]; then
+            swaymsg exit
+        elif [ "$XDG_CURRENT_DESKTOP" = "Hyprland" ]; then
+            hyprctl dispatch exit
+        elif [ "$XDG_CURRENT_DESKTOP" = "wayfire" ]; then
+            killall wayfire
+        else
+            notify-send "Logout Error" "Could not detect compositor"
+        fi
+        ;;
+esac

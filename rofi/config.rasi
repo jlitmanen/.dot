@@ -1,0 +1,4 @@
+
+//@theme "~/.config/rofi/power-menu.rasi"
+
+@theme "/usr/share/rofi/themes/Arc-Dark.rasi"

@@ -1,0 +1,51 @@
+@define-color primary rgba(201, 184, 144, 0.67);
+@define-color secondary rgba(89, 89, 89, 0.67);
+@define-color error rgb(255, 180, 171);
+
+* {
+    font-family:
+        "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    border: none;
+    border-radius: 0;
+}
+
+window#waybar {
+    color: @primary;
+}
+
+#workspaces button {
+    padding: 0 2px;
+    color: @primary;
+    border-bottom: 2px solid transparent;
+}
+
+#workspaces button.active {
+    background-color: @secondary;
+    border-bottom: 2px solid @primary;
+}
+
+#workspaces button.urgent {
+    background-color: @error;
+}
+
+#clock,
+#pulseaudio,
+#network,
+#bluetooth,
+#cpu,
+#memory,
+#battery,
+#tray {
+    padding: 0 10px;
+    margin: 4px 2px;
+    border-radius: 8px;
+}
+
+/* Specific styling for groups */
+#group-hardware,
+#group-network-bt {
+    border: 1px solid @primary;
+    border-radius: 8px;
+    margin-left: 5px;
+}
